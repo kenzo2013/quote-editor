@@ -19,4 +19,10 @@ class Quote < ApplicationRecord
   scope :ordered, -> { order(id: :desc) }
 
   has_many :line_item_dates, dependent: :destroy
+  has_many :line_items, through: :line_item_dates
+
+
+  def total_price
+    line_items.sum(&:total_price)
+  end
 end
