@@ -1,4 +1,8 @@
 class LineItemDate < ApplicationRecord
+
+  
+  broadcasts_to ->(line_item_date) { [line_item_date.quote, "line_item_dates"] }, inserts_by: :prepend
+
   belongs_to :quote
   has_many :line_items, dependent: :destroy
 
